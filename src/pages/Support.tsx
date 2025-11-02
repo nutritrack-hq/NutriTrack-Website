@@ -274,18 +274,18 @@ export default function Support() {
                 </header>
 
                 {/* Search + Category */}
-                <div className="grid gap-4 md:grid-cols-3 mb-8">
+                <div className="grid gap-8 md:grid-cols-5 mb-8">
                     <input
                         type="search"
                         placeholder="Search questions…"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="md:col-span-2 w-full rounded-2xl border border-neutral-200 bg-white/60 backdrop-blur px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                        className="md:col-span-3 w-full rounded-2xl border border-neutral-200 bg-white/60 backdrop-blur px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="w-full rounded-2xl border border-neutral-200 bg-white/60 backdrop-blur px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                        className="md:col-span-2  w-full rounded-2xl border border-neutral-200 bg-white/60 backdrop-blur px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         {categoriesList.map((c) => (
                             <option key={c} value={c}>{c}</option>
@@ -295,7 +295,7 @@ export default function Support() {
 
                 <div className="grid gap-8 md:grid-cols-5">
                     {/* FAQ list */}
-                    <section className="md:col-span-3">
+                    <section className="md:col-span-3 mb-10">
                         <h2 className="text-xl font-medium mb-4">FAQs</h2>
                         {loadingFaqs && <div className="text-sm text-neutral-500 mb-3">Loading FAQs…</div>}
                         {faqError && <div className="text-sm text-amber-700 mb-3">{faqError}</div>}
@@ -401,8 +401,8 @@ export default function Support() {
                     </aside>
                 </div>
 
-                <Footer />
             </div>
+            <Footer />
         </div>
     );
 }
