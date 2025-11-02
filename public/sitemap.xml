@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.nutritrack-app.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Note: The app uses hash-based routing (/#/privacy). Hash fragments are generally not indexed as separate URLs.
+       If you want /privacy to be indexed as its own page, consider migrating to real paths (e.g., /privacy) or serving a static page for it. -->
+</urlset>

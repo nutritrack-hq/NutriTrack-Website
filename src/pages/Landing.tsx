@@ -11,8 +11,7 @@ export default function Landing() {
       <section className="mx-auto max-w-7xl px-4 pt-14 sm:px-6 sm:pt-20">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
-            <h1 className="text-4xl font-bold sm:text-5xl">
-              Track your nutrition, build better habits.
+            <h1 className="text-4xl font-bold sm:text-5xl">Track your nutrition, build better habits.
             </h1>
             <p className="mt-4 text-lg text-gray-600">
               NutriTrack helps you log meals, analyze macros, and stay

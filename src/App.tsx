@@ -1,46 +1,48 @@
-import { useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import './App.css'
 import Landing from './pages/Landing'
 import Privacy from './pages/Privacy'
 import { gaEvent } from './analytics'
+import Support from './pages/Support'
+import TermsOfService from './components/TermsOfService'
+import Contact from './components/Contact'
 
-type Route = 'home' | 'privacy'
+function GAListener() {
+  const location = useLocation()
 
-function getRoute(): Route {
-  const hash = window.location.hash || '#/'
-  if (hash.startsWith('#/privacy')) return 'privacy'
-  return 'home'
+  useEffect(() => {
+    let page_title = 'NutriTrack — Track Nutrition Smarter'
+    if (location.pathname === '/privacy') page_title = 'Privacy • NutriTrack'
+    else if (location.pathname === '/support-center') page_title = 'Support • NutriTrack'
+    else if (location.pathname === '/terms-of-service') page_title = 'Terms of Service • NutriTrack'
+    else if (location.pathname === '/contact-us') page_title = 'Contact Us • NutriTrack'
+
+    document.title = page_title === 'NutriTrack — Track Nutrition Smarter' ? 'NutriTrack' : page_title
+
+    if (import.meta.env.PROD) {
+      gaEvent('page_view', {
+        page_title,
+        page_location: window.location.href,
+        page_path: location.pathname,
+      })
+    }
+  }, [location.pathname])
+
+  return null
 }
 
 export default function App() {
-  const [route, setRoute] = useState<Route>(getRoute())
-
-  useEffect(() => {
-    const onHashChange = () => {
-      const newRoute = getRoute()
-      setRoute(newRoute)
-
-      if (import.meta.env.PROD) {
-        gaEvent('page_view', {
-          page_title:
-            newRoute === 'privacy'
-              ? 'Privacy • NutriTrack'
-              : 'NutriTrack — Track Nutrition Smarter',
-          page_location: window.location.href,
-          page_path: window.location.hash,
-        })
-      }
-    }
-
-    window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
-  }, [])
-
-  useEffect(() => {
-    if (route === 'privacy') document.title = 'Privacy • NutriTrack'
-    else document.title = 'NutriTrack'
-  }, [route])
-
-  if (route === 'privacy') return <Privacy />
-  return <Landing />
+  return (
+    <BrowserRouter>
+      <GAListener />
+      <Routes>
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/support-center" element={<Support />} />
+        <Route path='/terms-of-service' element={<TermsOfService />} />
+        <Route path="/contact-us" element={<Contact />} />
+        <Route path="*" element={<Landing />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
