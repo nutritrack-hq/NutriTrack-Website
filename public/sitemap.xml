@@ -5,6 +5,24 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- Note: The app uses hash-based routing (/#/privacy). Hash fragments are generally not indexed as separate URLs.
-       If you want /privacy to be indexed as its own page, consider migrating to real paths (e.g., /privacy) or serving a static page for it. -->
+  <url>
+    <loc>https://www.nutritrack-app.com/privacy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.nutritrack-app.com/terms-of-service</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.nutritrack-app.com/contact-us</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.nutritrack-app.com/support-center</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

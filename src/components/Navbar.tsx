@@ -1,23 +1,45 @@
 import { gaEvent } from '../analytics'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2 cursor-pointer">
           {/* Placeholder logo */}
-          <img src="/logo-green.jpg" className="h-10 w-10 rounded" />
+          <img
+            src="/logo-green.jpg"
+            alt="NutriTrack logo"
+            width={40}
+            height={40}
+            decoding="async"
+            className="h-10 w-10 rounded"
+          />
           <span className="text-lg font-semibold text-gray-900">NutriTrack</span>
         </Link>
-        <nav className="hidden items-center gap-6 md:flex">
-          <Link to="/" className="text-sm font-medium text-gray-700 hover:text-gray-900">Home</Link>
+        <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `text-sm font-medium ${isActive ? 'text-gray-900' : 'text-gray-700 hover:text-gray-900'}`
+            }
+          >
+            Home
+          </NavLink>
 
-          <Link to="/contact-us" className="text-sm font-medium text-gray-700 hover:text-gray-900">Contact </Link>
+          <NavLink
+            to="/contact-us"
+            className={({ isActive }) =>
+              `text-sm font-medium ${isActive ? 'text-gray-900' : 'text-gray-700 hover:text-gray-900'}`
+            }
+          >
+            Contact
+          </NavLink>
           <a
             href="https://testflight.apple.com/join/uhsJJhnK"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Download the NutriTrack iOS TestFlight beta"
             onClick={() => {
               if (import.meta.env.PROD) {
                 gaEvent('click', {

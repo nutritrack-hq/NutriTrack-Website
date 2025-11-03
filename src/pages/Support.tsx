@@ -12,7 +12,7 @@
 //
 // Server route examples for /api/support are at the bottom of this file (commented).
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useDeferredValue } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +21,7 @@ import Footer from '../components/Footer';
 import { getFaqs } from "../lib/sanity";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
-
+import { Helmet } from "react-helmet-async"
 declare global {
     interface Window {
         gtag?: (...args: any[]) => void;
@@ -126,10 +126,12 @@ export default function Support() {
         };
     }, []);
 
+    // Debounced search query for improved UX
+    const deferredQuery = useDeferredValue(query);
     // Filter + search (use remote FAQs only)
     const filteredFaqs = useMemo<FaqItem[]>(() => {
         const source = faqs ?? [];
-        const q = query.toLowerCase().trim();
+        const q = deferredQuery.toLowerCase().trim();
         return source.filter((f: FaqItem) => {
             const inCat = category === "All" || f.category === category;
             if (!inCat) return false;
@@ -137,9 +139,42 @@ export default function Support() {
             const hay = (f.question + " " + JSON.stringify(f.answer) + " " + (f.tags?.join(" ") ?? "")).toLowerCase();
             return hay.includes(q);
         });
-    }, [query, category, faqs]);
+    }, [deferredQuery, category, faqs]);
 
     const categoriesList = useMemo<string[]>(() => ["All", ...Array.from(new Set((faqs ?? []).map((f: FaqItem) => f.category)))], [faqs]);
+
+    // Convert Sanity Portable Text blocks to plain text for JSON-LD
+    const toPlainText = (blocks: PortableTextBlock[] = []): string => {
+        try {
+            return blocks
+                .map((block: any) => {
+                    if (!block) return '';
+                    if (block._type !== 'block' || !Array.isArray(block.children)) return '';
+                    return block.children.map((span: any) => span?.text ?? '').join('');
+                })
+                .join('\n')
+                .trim();
+        } catch {
+            return '';
+        }
+    };
+
+    // Build FAQPage JSON-LD from fetched FAQs
+    const faqSchema = useMemo(() => {
+        if (!faqs || faqs.length === 0) return null;
+        return {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.slice(0, 100).map((f) => ({
+                "@type": "Question",
+                "name": f.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": toPlainText(f.answer)
+                }
+            }))
+        };
+    }, [faqs]);
 
     // GA4 helper (safe)
     const gtag = (name: string, params: Record<string, unknown>) => {
@@ -266,6 +301,45 @@ export default function Support() {
     // UI
     return (
         <div className="min-h-screen bg-white text-gray-900">
+            {/* SEO + JSON-LD */}
+            {/* Add Helmet for meta tags/JSON-LD */}
+            {
+                // Insert react-helmet or similar block here if not already present
+            }
+            <Helmet>
+                <title>NutriTrack Support Center – Help &amp; Contact</title>
+                <link rel="canonical" href="https://www.nutritrack-app.com/support-center" />
+                <meta name="description" content="Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more." />
+                <meta property="og:title" content="NutriTrack Support Center – Help &amp; Contact" />
+                <meta property="og:description" content="Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://www.nutritrack-app.com/support-center" />
+                <meta property="og:image" content="https://www.nutritrack-app.com/logo-green.jpg" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:site_name" content="NutriTrack" />
+                <meta property="og:locale" content="en_US" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="NutriTrack Support Center – Help &amp; Contact" />
+                <meta name="twitter:description" content="Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more." />
+                <meta name="twitter:image" content="https://www.nutritrack-app.com/logo-green.jpg" />
+                {/* WebPage JSON-LD */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "WebPage",
+                        "name": "NutriTrack Support Center",
+                        "description": "Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more.",
+                        "url": "https://www.nutritrack-app.com/support-center"
+                    })}
+                </script>
+                {/* FAQPage JSON-LD */}
+                {faqSchema && (
+                    <script type="application/ld+json">
+                        {JSON.stringify(faqSchema)}
+                    </script>
+                )}
+            </Helmet>
             <Navbar />
             <div className="mx-auto max-w-6xl px-4 py-10">
                 <header className="mb-8">
@@ -307,6 +381,9 @@ export default function Support() {
                                     <li key={f.id} className="rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur">
                                         <button
                                             type="button"
+                                            aria-expanded={open}
+                                            aria-controls={`faq-${f.id}`}
+                                            aria-labelledby={`q-${f.id}`}
                                             onClick={() => {
                                                 setExpandedId(open ? null : f.id);
                                                 if (!open) gtag("faq_open", { id: f.id, category: f.category });
@@ -315,14 +392,19 @@ export default function Support() {
                                         >
                                             <div className="flex items-start justify-between gap-4">
                                                 <div>
-                                                    <p className="font-medium">{f.question}</p>
+                                                    <p className="font-medium" id={`q-${f.id}`}>{f.question}</p>
                                                     <span className="text-xs text-neutral-500">{f.category}</span>
                                                 </div>
                                                 <span className="text-neutral-400">{open ? "−" : "+"}</span>
                                             </div>
                                         </button>
                                         {open && (
-                                            <div className="px-4 pb-4 text-sm text-neutral-700">
+                                            <div
+                                                id={`faq-${f.id}`}
+                                                role="region"
+                                                aria-labelledby={`q-${f.id}`}
+                                                className="px-4 pb-4 text-sm text-neutral-700"
+                                            >
                                                 <div className="prose">
                                                     <PortableText value={f.answer as PortableTextBlock[]} />
                                                 </div>
@@ -343,18 +425,31 @@ export default function Support() {
                         <h2 className="text-xl font-medium mb-4">Contact support</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur p-4 space-y-4">
                             <div>
-                                <label className="block text-sm mb-1">Email *</label>
-                                <input {...register("email")} type="email" className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500" />
-                                {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email.message}</p>}
+                                <label className="block text-sm mb-1" htmlFor="support-email">Email *</label>
+                                <input
+                                    id="support-email"
+                                    {...register("email")}
+                                    type="email"
+                                    aria-invalid={!!errors.email}
+                                    aria-describedby={errors.email ? "support-email-error" : undefined}
+                                    className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                {errors.email && <p id="support-email-error" className="text-xs text-red-600 mt-1">{errors.email.message}</p>}
                             </div>
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-sm mb-1">Name</label>
-                                    <input {...register("name")} type="text" className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <label className="block text-sm mb-1" htmlFor="support-name">Name</label>
+                                    <input id="support-name" {...register("name")} type="text" className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm mb-1">Topic *</label>
-                                    <select {...register("topic")} className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500">
+                                    <label className="block text-sm mb-1" htmlFor="support-topic">Topic *</label>
+                                    <select
+                                        id="support-topic"
+                                        {...register("topic")}
+                                        aria-invalid={!!errors.topic}
+                                        aria-describedby={errors.topic ? "support-topic-error" : undefined}
+                                        className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
                                         <option value="">Select…</option>
                                         <option>General</option>
                                         <option>Account</option>
@@ -364,18 +459,32 @@ export default function Support() {
                                         <option>Billing</option>
                                         <option>Bug</option>
                                     </select>
-                                    {errors.topic && <p className="text-xs text-red-600 mt-1">{errors.topic.message as string}</p>}
+                                    {errors.topic && <p id="support-topic-error" className="text-xs text-red-600 mt-1">{errors.topic.message as string}</p>}
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-sm mb-1">Subject *</label>
-                                <input {...register("subject")} type="text" className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500" />
-                                {errors.subject && <p className="text-xs text-red-600 mt-1">{errors.subject.message}</p>}
+                                <label className="block text-sm mb-1" htmlFor="support-subject">Subject *</label>
+                                <input
+                                    id="support-subject"
+                                    {...register("subject")}
+                                    type="text"
+                                    aria-invalid={!!errors.subject}
+                                    aria-describedby={errors.subject ? "support-subject-error" : undefined}
+                                    className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                {errors.subject && <p id="support-subject-error" className="text-xs text-red-600 mt-1">{errors.subject.message}</p>}
                             </div>
                             <div>
-                                <label className="block text-sm mb-1">Message *</label>
-                                <textarea {...register("message")} rows={5} className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500" />
-                                {errors.message && <p className="text-xs text-red-600 mt-1">{errors.message.message}</p>}
+                                <label className="block text-sm mb-1" htmlFor="support-message">Message *</label>
+                                <textarea
+                                    id="support-message"
+                                    {...register("message")}
+                                    rows={5}
+                                    aria-invalid={!!errors.message}
+                                    aria-describedby={errors.message ? "support-message-error" : undefined}
+                                    className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                {errors.message && <p id="support-message-error" className="text-xs text-red-600 mt-1">{errors.message.message}</p>}
                             </div>
                             <div className="mt-2">
                                 <div ref={recaptchaRef} className="g-recaptcha" />

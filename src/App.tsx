@@ -1,48 +1,85 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import './App.css'
 import Landing from './pages/Landing'
 import Privacy from './pages/Privacy'
 import { gaEvent } from './analytics'
 import Support from './pages/Support'
-import TermsOfService from './components/TermsOfService'
+import TermsOfService from './pages/TermsOfService'
 import Contact from './components/Contact'
 
 function GAListener() {
   const location = useLocation()
 
+  let title, description, path = location.pathname
+  switch (path) {
+    case '/privacy':
+      title = 'Privacy • NutriTrack'
+      description = 'Learn how NutriTrack protects your privacy and handles your data responsibly.'
+      break
+    case '/support-center':
+      title = 'Support • NutriTrack'
+      description = 'Get help, explore FAQs, or contact NutriTrack support for quick answers.'
+      break
+    case '/terms-of-service':
+      title = 'Terms of Service • NutriTrack'
+      description = 'Review the terms and conditions for using NutriTrack.'
+      break
+    case '/contact-us':
+      title = 'Contact Us • NutriTrack'
+      description = 'Reach out to NutriTrack’s team for questions, feedback, or support.'
+      break
+    default:
+      title = 'NutriTrack — Track Nutrition Smarter'
+      description = 'Track your nutrition, goals, and progress effortlessly with NutriTrack.'
+      break
+  }
+
+  const baseUrl = 'https://www.nutritrack-app.com'
+  const canonicalUrl = `${baseUrl}${path === '*' ? '/' : path}`
+  const ogImage = `${baseUrl}/logo-green.jpg`
+
   useEffect(() => {
-    let page_title = 'NutriTrack — Track Nutrition Smarter'
-    if (location.pathname === '/privacy') page_title = 'Privacy • NutriTrack'
-    else if (location.pathname === '/support-center') page_title = 'Support • NutriTrack'
-    else if (location.pathname === '/terms-of-service') page_title = 'Terms of Service • NutriTrack'
-    else if (location.pathname === '/contact-us') page_title = 'Contact Us • NutriTrack'
-
-    document.title = page_title === 'NutriTrack — Track Nutrition Smarter' ? 'NutriTrack' : page_title
-
     if (import.meta.env.PROD) {
       gaEvent('page_view', {
-        page_title,
+        page_title: title,
         page_location: window.location.href,
         page_path: location.pathname,
       })
     }
   }, [location.pathname])
 
-  return null
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:image" content={ogImage} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:card" content="summary_large_image" />
+    </Helmet>
+  )
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <GAListener />
-      <Routes>
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/support-center" element={<Support />} />
-        <Route path='/terms-of-service' element={<TermsOfService />} />
-        <Route path="/contact-us" element={<Contact />} />
-        <Route path="*" element={<Landing />} />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <GAListener />
+        <Routes>
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/support-center" element={<Support />} />
+          <Route path='/terms-of-service' element={<TermsOfService />} />
+          <Route path="/contact-us" element={<Contact />} />
+          <Route path="*" element={<Landing />} />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   )
 }

@@ -3,5 +3,10 @@
 User-agent: *
 Allow: /
 
+# Prevent indexing of private and API routes
+Disallow: /admin/
+Disallow: /api/
+Disallow: /test/
+
 # Point crawlers to the sitemap
 Sitemap: https://www.nutritrack-app.com/sitemap.xml
