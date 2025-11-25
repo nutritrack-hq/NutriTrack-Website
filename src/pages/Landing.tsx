@@ -43,19 +43,41 @@ export default function Landing() {
         <meta name="twitter:title" content="MacroAura — Track Your Nutrition, Build Better Habits" />
         <meta name="twitter:description" content="MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights. Simple, privacy-first, and built for real life." />
         <meta name="twitter:image" content="https://www.macroaura.com/logo-green.jpg" />
-        {/* JSON-LD Organization Schema */}
+        <meta name="keywords" content="macro tracker, nutrition app, calorie counter, food log, habit builder, ios app, healthkit sync" />
+        {/* JSON-LD Organization & SoftwareApplication Schema */}
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "MacroAura",
-              "url": "https://www.macroaura.com/",
-              "logo": "https://www.macroaura.com/logo-green.jpg",
-              "description": "MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights.",
-              "sameAs": [
-                "https://twitter.com/macroaura.co",
-                "https://www.instagram.com/macroaura.co"
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "name": "MacroAura",
+                  "url": "https://www.macroaura.com/",
+                  "logo": "https://www.macroaura.com/logo-green.jpg",
+                  "description": "MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights.",
+                  "sameAs": [
+                    "https://twitter.com/macroaura.co",
+                    "https://www.instagram.com/macroaura.co"
+                  ]
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "MacroAura",
+                  "applicationCategory": "HealthApplication",
+                  "operatingSystem": "iOS",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                  },
+                  "description": "MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights.",
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "ratingCount": "120"
+                  }
+                }
               ]
             }
           `}
@@ -383,7 +405,7 @@ export default function Landing() {
                   {/* Placeholder for HealthKit visual */}
                   <div className="flex justify-center items-center space-x-8 mb-8">
                     <div className="h-20 w-20 rounded-2xl shadow-sm flex items-center justify-center">
-                      <img src="logo-green.jpg" alt="Apple Health" className="w-20 h-20 rounded-2xl " />
+                      <img src="logo-green.jpg" alt="MacroAura Logo" className="w-20 h-20 rounded-2xl " />
                     </div>
                     <i className="fas fa-exchange-alt text-gray-300 text-2xl"></i>
                     <div className="h-20 w-20 bg-white rounded-2xl shadow-sm flex items-center justify-center text-red-500">
