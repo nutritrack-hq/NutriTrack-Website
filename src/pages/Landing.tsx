@@ -163,7 +163,7 @@ export default function Landing() {
         </section>
 
         {/* Features */}
-        <section id="features" className="py-24 bg-white relative">
+        <section id="features" className="py-24 bg-main/30 relative">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <motion.h2
@@ -229,9 +229,9 @@ export default function Landing() {
                   icon: "fa-lock"
                 },
                 {
-                  title: "Cross-device sync",
-                  desc: "Use it on web and mobile, seamlessly.",
-                  icon: "fa-sync"
+                  title: "Food Library",
+                  desc: "Create frequently used meals and save time with quick-add meals.",
+                  icon: "fa-utensils"
                 },
               ].map((f) => (
                 <motion.div
@@ -279,7 +279,7 @@ export default function Landing() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={fadeInUp}
-                    className="lg:text-right"
+                    className="text-center lg:text-right"
                   >
 
                     <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">Log meals your way</h3>
@@ -292,39 +292,47 @@ export default function Landing() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="mt-12 lg:mt-0 relative group"
+                    className="mt-12 lg:mt-0 relative group flex justify-center lg:block"
                   >
-                    <div className="relative rounded-3xl bg-white  transform transition-transform group-hover:scale-[1.02] duration-500 rotate-1">
-                      <img src="/app-img-diary.png" alt="Track calories" className="w-3/5 rounded-2xl" />
+                    <div className="relative rounded-3xl bg-white  transform transition-transform group-hover:scale-[1.02] duration-500  w-4/5 lg:w-full flex justify-center md:-rotate-1">
+                      <img src="/app-img-diary.png" alt="Track calories" className="w-full lg:w-3/5 rounded-2xl" />
                     </div>
                   </motion.div>
                 </div>
 
                 {/* Step 2 */}
                 <div className="relative lg:grid lg:grid-cols-2 lg:gap-20 items-center">
-                  <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="order-2 lg:order-1 mt-12 lg:mt-0 relative group"
-                  >
-                    <div className="relative rounded-3xl  transform transition-transform group-hover:scale-[1.02] duration-500 rotate-1 ">
-                      <img src="/app-home.png" alt="Follow progress" className="w-3/5 rounded-2xl" />
-                    </div>
-                  </motion.div>
+                  {/* TEXT FIRST IN DOM */}
                   <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={fadeInUp}
-                    className="order-1 lg:order-2 lg:text-left"
+                    className="order-1 lg:order-2 text-center lg:text-left"
                   >
-
-                    <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">See your progress clearly</h3>
+                    <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">
+                      See your progress clearly
+                    </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
                       Charts, streaks, and insights that keep you on track without stressing perfection.
                     </p>
+                  </motion.div>
+
+                  {/* IMAGE SECOND IN DOM */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="order-2 lg:order-1 mt-12 lg:mt-0 relative group flex justify-center lg:block"
+                  >
+                    <div className="relative rounded-3xl transform transition-transform group-hover:scale-[1.02] duration-500 w-4/5 lg:w-full flex justify-center md:rotate-1">
+                      <img
+                        src="/progress-screen.png"
+                        alt="Follow progress"
+                        className="w-full lg:w-3/5 rounded-2xl"
+                      />
+                    </div>
                   </motion.div>
                 </div>
 
@@ -335,7 +343,7 @@ export default function Landing() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={fadeInUp}
-                    className="lg:text-right"
+                    className="text-center lg:text-right"
                   >
 
                     <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">Smarter eating, simplified</h3>
@@ -348,10 +356,10 @@ export default function Landing() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="mt-12 lg:mt-0 relative group"
+                    className="mt-12 lg:mt-0 relative group flex justify-center lg:block"
                   >
-                    <div className="relative rounded-3xl  transform transition-transform group-hover:scale-[1.02] duration-500 rotate-1">
-                      <img src="/app-img-search.png" alt="Search foods" className="w-3/5 rounded-2xl" />
+                    <div className="relative rounded-3xl  transform transition-transform group-hover:scale-[1.02] duration-500 w-4/5 lg:w-full flex justify-center md:-rotate-1">
+                      <img src="/app-img-search.png" alt="Search foods" className="w-full lg:w-3/5 rounded-2xl" />
                     </div>
                   </motion.div>
                 </div>
@@ -360,21 +368,87 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* Apple HealthKit Section */}
+        <section className="py-24 bg-white overflow-hidden">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 bg-gray-900 p-10  md:rounded-2xl">
+            <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="lg:col-span-6 order-2 lg:order-1 mt-10 lg:mt-0"
+              >
+                <div className="relative rounded-3xl p-8">
+                  {/* Placeholder for HealthKit visual */}
+                  <div className="flex justify-center items-center space-x-8 mb-8">
+                    <div className="h-20 w-20 rounded-2xl shadow-sm flex items-center justify-center">
+                      <img src="logo-green.jpg" alt="Apple Health" className="w-20 h-20 rounded-2xl " />
+                    </div>
+                    <i className="fas fa-exchange-alt text-gray-300 text-2xl"></i>
+                    <div className="h-20 w-20 bg-white rounded-2xl shadow-sm flex items-center justify-center text-red-500">
+                      <img src="Apple_Health.webp" alt="Apple Health" className="w-20 h-20" />
+                    </div>
+                  </div>
+
+                </div>
+              </motion.div>
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="lg:col-span-6 order-1 lg:order-2 text-center lg:text-left"
+              >
+                <div className="hidden md:inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-red-50 text-red-500 text-3xl mb-8">
+                  <img src="Apple_Health.webp" alt="Apple Health" className="w-16 h-16 rounded-2xl" />
+                </div>
+                <h2 className="text-3xl font-display font-bold text-white sm:text-4xl mb-6">
+                  Works perfectly with <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-600">Apple Health</span>
+                </h2>
+                <p className="text-lg text-white leading-relaxed mb-8">
+                  MacroAura syncs seamlessly with Apple Health. Your steps and active energy are automatically imported to adjust your daily targets, while your nutrition data flows back to keep everything in sync.
+                </p>
+                <ul className="space-y-4 text-left mx-auto lg:mx-0 max-w-md">
+                  {[
+                    "Automatic calorie adjustments based on activity",
+                    "Syncs nutrients to Health app",
+                    "Privacy-focused local integration"
+                  ].map((item, i) => (
+                    <motion.li
+                      key={i}
+                      className="flex items-center text-white"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 + 0.3 }}
+                      viewport={{ once: true }}
+                    >
+                      <i className="fas fa-check-circle text-main mr-3"></i>
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
-        <section id="cta" className="py-24 bg-white">
+        <section id="cta" className="py-24 bg-main/80 ">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
-              className="relative overflow-hidden rounded-[3rem] bg-gray-900 px-6 py-24 shadow-2xl sm:px-12 sm:py-32 lg:px-16 text-center"
+              className="relative overflow-hidden rounded-[3rem]  px-6 py-24 sm:py-32 lg:px-16 text-center"
             >
               <div className="relative z-10">
                 <h2 className="text-4xl font-display font-bold tracking-tight text-white sm:text-5xl mb-6">
                   Start tracking today
                 </h2>
-                <p className="mx-auto max-w-2xl text-xl text-gray-300 mb-10">
+                <p className="mx-auto max-w-2xl text-xl text-gray-100 mb-10">
                   Join others building sustainable nutrition habits with MacroAura.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -382,7 +456,7 @@ export default function Landing() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     href="https://testflight.apple.com/join/uhsJJhnK"
-                    className="rounded-full bg-main px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:bg-main-dark hover:shadow-xl"
+                    className="rounded-full bg-white px-8 py-4 text-lg font-bold text-black hover:text-white shadow-lg transition-all duration-300 hover:bg-main-dark hover:shadow-xl"
                     onClick={() => {
                       if (import.meta.env.PROD) {
                         gaEvent('click', {
