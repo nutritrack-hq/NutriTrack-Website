@@ -1,4 +1,4 @@
-# robots.txt for NutriTrack
+# robots.txt for MacroAura
 # Allow all crawlers to access the site
 User-agent: *
 Allow: /
@@ -9,4 +9,4 @@ Disallow: /api/
 Disallow: /test/
 
 # Point crawlers to the sitemap
-Sitemap: https://www.nutritrack-app.com/sitemap.xml
+Sitemap: https://www.macroaura.com/sitemap.xml

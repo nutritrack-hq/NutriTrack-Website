@@ -2,37 +2,43 @@ import { Link } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:flex sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <p className="mb-4 text-center text-sm text-gray-500 sm:mb-0 sm:text-left">© {new Date().getFullYear()} NutriTrack. All rights reserved.</p>
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-          <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
-            <Link className="px-3 py-2 text-md text-gray-600 hover:text-gray-900" to="/">Home</Link>
-            <Link className="px-3 py-2 text-md text-gray-600 hover:text-gray-900" to="/contact-us">Contact</Link>
-            <Link className="px-3 py-2 text-md text-gray-600 hover:text-gray-900" to="/privacy">Privacy</Link>
-            <Link className="px-3 py-2 text-md text-gray-600 hover:text-gray-900" to="/terms-of-service">Terms of Service</Link>
-            <Link className="px-3 py-2 text-md text-gray-600 hover:text-gray-900" to="/support-center">Support Center</Link>
+    <footer className="border-t border-gray-100 bg-surface">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
+          <div className="flex items-center gap-2">
+            <img src="/logo-green.jpg" alt="MacroAura" className="h-8 w-8 rounded-lg" />
+            <span className="text-lg font-display font-bold text-gray-900">MacroAura</span>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-8 text-sm font-medium text-gray-600">
+            <Link className="hover:text-main transition-colors" to="/">Home</Link>
+            <Link className="hover:text-main transition-colors" to="/contact-us">Contact</Link>
+            <Link className="hover:text-main transition-colors" to="/privacy">Privacy</Link>
+            <Link className="hover:text-main transition-colors" to="/terms-of-service">Terms</Link>
+            <Link className="hover:text-main transition-colors" to="/support-center">Support</Link>
+          </div>
+          <div className="flex gap-5">
             <a
-              href="https://www.instagram.com/nutritrack.co"
+              href="https://www.instagram.com/macroaura.co"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-600 hover:text-gray-900"
+              className="text-gray-400 hover:text-main transition-colors hover:scale-110 transform duration-200"
               aria-label="Instagram"
             >
               <i className="fab fa-instagram text-xl"></i>
             </a>
             <a
-              href="https://www.tiktok.com/@nutritrack.co"
+              href="https://www.tiktok.com/@macroaura"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-600 hover:text-gray-900"
+              className="text-gray-400 hover:text-main transition-colors hover:scale-110 transform duration-200"
               aria-label="TikTok"
             >
               <i className="fab fa-tiktok text-xl"></i>
             </a>
           </div>
+        </div>
+        <div className="mt-8 border-t border-gray-200 pt-8 text-center">
+          <p className="text-sm text-gray-500">© {new Date().getFullYear()} MacroAura. All rights reserved.</p>
         </div>
       </div>
     </footer>

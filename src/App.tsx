@@ -15,28 +15,28 @@ function GAListener() {
   let title, description, path = location.pathname
   switch (path) {
     case '/privacy':
-      title = 'Privacy • NutriTrack'
-      description = 'Learn how NutriTrack protects your privacy and handles your data responsibly.'
+      title = 'Privacy • MacroAura'
+      description = 'Learn how MacroAura protects your privacy and handles your data responsibly.'
       break
     case '/support-center':
-      title = 'Support • NutriTrack'
-      description = 'Get help, explore FAQs, or contact NutriTrack support for quick answers.'
+      title = 'Support • MacroAura'
+      description = 'Get help, explore FAQs, or contact MacroAura support for quick answers.'
       break
     case '/terms-of-service':
-      title = 'Terms of Service • NutriTrack'
-      description = 'Review the terms and conditions for using NutriTrack.'
+      title = 'Terms of Service • MacroAura'
+      description = 'Review the terms and conditions for using MacroAura.'
       break
     case '/contact-us':
-      title = 'Contact Us • NutriTrack'
-      description = 'Reach out to NutriTrack’s team for questions, feedback, or support.'
+      title = 'Contact Us • MacroAura'
+      description = 'Reach out to MacroAura’s team for questions, feedback, or support.'
       break
     default:
-      title = 'NutriTrack — Track Nutrition Smarter'
-      description = 'Track your nutrition, goals, and progress effortlessly with NutriTrack.'
+      title = 'MacroAura — Track Nutrition Smarter'
+      description = 'Track your meals, calories, macros, and progress effortlessly with MacroAura.'
       break
   }
 
-  const baseUrl = 'https://www.nutritrack-app.com'
+  const baseUrl = 'https://www.macroaura.com'
   const canonicalUrl = `${baseUrl}${path === '*' ? '/' : path}`
   const ogImage = `${baseUrl}/logo-green.jpg`
 

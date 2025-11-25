@@ -5,7 +5,7 @@ import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
-  title: 'NutriTrack',
+  title: 'MacroAura',
 
   projectId: 'esg2ut4k',
   dataset: 'prod',

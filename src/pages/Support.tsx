@@ -1,4 +1,4 @@
-// NutriTrack Help Center — React + Tailwind + react-hook-form + zod
+// MacroAura Help Center — React + Tailwind + react-hook-form + zod
 // ---------------------------------------------------------------
 // Drop this into your React/Next.js app (e.g., app/help/page.tsx or pages/help.tsx)
 // and ensure Tailwind is configured. This component renders:
@@ -290,47 +290,47 @@ export default function Support() {
         } catch (e) {
             console.error("Form submission failed:", e);
             setSubmitState("error");
-            const subject = encodeURIComponent(`[NutriTrack Support] ${data.subject}`);
+            const subject = encodeURIComponent(`[MacroAura Support] ${data.subject}`);
             const body = encodeURIComponent(
                 `Topic: ${data.topic}\nName: ${data.name ?? ""}\nEmail: ${data.email}\nPath: ${typeof window !== "undefined" ? window.location.href : ""}\n\n${data.message}`
             );
-            window.location.href = `mailto:support@nutritrack-app.com?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:support@macroaura.com?subject=${subject}&body=${body}`;
         }
     };
 
     // UI
     return (
-        <div className="min-h-screen bg-white text-gray-900">
+        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
             {/* SEO + JSON-LD */}
             {/* Add Helmet for meta tags/JSON-LD */}
             {
                 // Insert react-helmet or similar block here if not already present
             }
             <Helmet>
-                <title>NutriTrack Support Center – Help &amp; Contact</title>
-                <link rel="canonical" href="https://www.nutritrack-app.com/support-center" />
-                <meta name="description" content="Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more." />
-                <meta property="og:title" content="NutriTrack Support Center – Help &amp; Contact" />
-                <meta property="og:description" content="Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more." />
+                <title>MacroAura Support Center – Help &amp; Contact</title>
+                <link rel="canonical" href="https://www.macroaura.com/support-center" />
+                <meta name="description" content="Get help with MacroAura: browse FAQs or contact support for account, food logging, AI, billing, and more." />
+                <meta property="og:title" content="MacroAura Support Center – Help &amp; Contact" />
+                <meta property="og:description" content="Get help with MacroAura: browse FAQs or contact support for account, food logging, AI, billing, and more." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.nutritrack-app.com/support-center" />
-                <meta property="og:image" content="https://www.nutritrack-app.com/logo-green.jpg" />
+                <meta property="og:url" content="https://www.macroaura.com/support-center" />
+                <meta property="og:image" content="https://www.macroaura.com/logo-green.jpg" />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
-                <meta property="og:site_name" content="NutriTrack" />
+                <meta property="og:site_name" content="MacroAura" />
                 <meta property="og:locale" content="en_US" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="NutriTrack Support Center – Help &amp; Contact" />
-                <meta name="twitter:description" content="Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more." />
-                <meta name="twitter:image" content="https://www.nutritrack-app.com/logo-green.jpg" />
+                <meta name="twitter:title" content="MacroAura Support Center – Help &amp; Contact" />
+                <meta name="twitter:description" content="Get help with MacroAura: browse FAQs or contact support for account, food logging, AI, billing, and more." />
+                <meta name="twitter:image" content="https://www.macroaura.com/logo-green.jpg" />
                 {/* WebPage JSON-LD */}
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "WebPage",
-                        "name": "NutriTrack Support Center",
-                        "description": "Get help with NutriTrack: browse FAQs or contact support for account, food logging, AI, billing, and more.",
-                        "url": "https://www.nutritrack-app.com/support-center"
+                        "name": "MacroAura Support Center",
+                        "description": "Get help with MacroAura: browse FAQs or contact support for account, food logging, AI, billing, and more.",
+                        "url": "https://www.macroaura.com/support-center"
                     })}
                 </script>
                 {/* FAQPage JSON-LD */}
@@ -341,44 +341,49 @@ export default function Support() {
                 )}
             </Helmet>
             <Navbar />
-            <div className="mx-auto max-w-6xl px-4 py-10">
-                <header className="mb-8">
-                    <h1 className="text-3xl font-semibold">Support Center</h1>
-                    <p className="text-sm text-neutral-500 mt-2">Find quick answers or contact support@nutritrack-app.com</p>
+            <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+                <header className="mb-12 text-center max-w-2xl mx-auto">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-4">Support Center</h1>
+                    <p className="text-lg text-gray-600">Find quick answers or contact our support team directly.</p>
                 </header>
 
                 {/* Search + Category */}
-                <div className="grid gap-8 md:grid-cols-5 mb-8">
-                    <input
-                        type="search"
-                        placeholder="Search questions…"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        className="md:col-span-3 w-full rounded-2xl border border-neutral-200 bg-white/60 backdrop-blur px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="md:col-span-2  w-full rounded-2xl border border-neutral-200 bg-white/60 backdrop-blur px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        {categoriesList.map((c) => (
-                            <option key={c} value={c}>{c}</option>
-                        ))}
-                    </select>
+                <div className="grid gap-6 md:grid-cols-5 mb-12">
+                    <div className="md:col-span-3 relative">
+                        <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input
+                            type="search"
+                            placeholder="Search questions…"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            className="w-full rounded-xl border border-gray-200 bg-white pl-11 pr-4 py-3 outline-none focus:ring-2 focus:ring-main focus:border-transparent shadow-sm transition-all"
+                        />
+                    </div>
+                    <div className="md:col-span-2">
+                        <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-main focus:border-transparent shadow-sm transition-all"
+                        >
+                            {categoriesList.map((c) => (
+                                <option key={c} value={c}>{c}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
-                <div className="grid gap-8 md:grid-cols-5">
+                <div className="grid gap-12 lg:grid-cols-12">
                     {/* FAQ list */}
-                    <section className="md:col-span-3 mb-10">
-                        <h2 className="text-xl font-medium mb-4">FAQs</h2>
-                        {loadingFaqs && <div className="text-sm text-neutral-500 mb-3">Loading FAQs…</div>}
-                        {faqError && <div className="text-sm text-amber-700 mb-3">{faqError}</div>}
+                    <section className="lg:col-span-7">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+                        {loadingFaqs && <div className="text-sm text-gray-500 mb-3 animate-pulse">Loading FAQs…</div>}
+                        {faqError && <div className="text-sm text-red-600 mb-3 bg-red-50 p-3 rounded-lg">{faqError}</div>}
 
-                        <ul className="space-y-3">
+                        <ul className="space-y-4">
                             {filteredFaqs.map((f) => {
                                 const open = expandedId === f.id;
                                 return (
-                                    <li key={f.id} className="rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur">
+                                    <li key={f.id} className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md">
                                         <button
                                             type="button"
                                             aria-expanded={open}
@@ -388,14 +393,16 @@ export default function Support() {
                                                 setExpandedId(open ? null : f.id);
                                                 if (!open) gtag("faq_open", { id: f.id, category: f.category });
                                             }}
-                                            className="w-full text-left px-4 py-4 cursor-pointer"
+                                            className="w-full text-left px-6 py-5 cursor-pointer focus:outline-none"
                                         >
                                             <div className="flex items-start justify-between gap-4">
                                                 <div>
-                                                    <p className="font-medium" id={`q-${f.id}`}>{f.question}</p>
-                                                    <span className="text-xs text-neutral-500">{f.category}</span>
+                                                    <p className="font-semibold text-gray-900 text-lg" id={`q-${f.id}`}>{f.question}</p>
+                                                    <span className="inline-block mt-1 text-xs font-medium text-main bg-main/10 px-2 py-0.5 rounded-full">{f.category}</span>
                                                 </div>
-                                                <span className="text-neutral-400">{open ? "−" : "+"}</span>
+                                                <span className={`text-gray-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
+                                                    <i className="fas fa-chevron-down"></i>
+                                                </span>
                                             </div>
                                         </button>
                                         {open && (
@@ -403,9 +410,9 @@ export default function Support() {
                                                 id={`faq-${f.id}`}
                                                 role="region"
                                                 aria-labelledby={`q-${f.id}`}
-                                                className="px-4 pb-4 text-sm text-neutral-700"
+                                                className="px-6 pb-6 text-gray-600 border-t border-gray-100 pt-4"
                                             >
-                                                <div className="prose">
+                                                <div className="prose prose-gray max-w-none">
                                                     <PortableText value={f.answer as PortableTextBlock[]} />
                                                 </div>
                                             </div>
@@ -416,97 +423,121 @@ export default function Support() {
                         </ul>
 
                         {filteredFaqs.length === 0 && query.length > 0 && (
-                            <div className="text-sm text-neutral-500">No results. Try a different keyword or category.</div>
+                            <div className="text-center py-12 bg-white rounded-2xl border border-gray-200">
+                                <p className="text-gray-500">No results found for "{query}".</p>
+                                <button onClick={() => setQuery("")} className="mt-2 text-main font-medium hover:underline">Clear search</button>
+                            </div>
                         )}
                     </section>
 
                     {/* Contact form */}
-                    <aside className="md:col-span-2">
-                        <h2 className="text-xl font-medium mb-4">Contact support</h2>
-                        <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur p-4 space-y-4">
-                            <div>
-                                <label className="block text-sm mb-1" htmlFor="support-email">Email *</label>
-                                <input
-                                    id="support-email"
-                                    {...register("email")}
-                                    type="email"
-                                    aria-invalid={!!errors.email}
-                                    aria-describedby={errors.email ? "support-email-error" : undefined}
-                                    className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                {errors.email && <p id="support-email-error" className="text-xs text-red-600 mt-1">{errors.email.message}</p>}
-                            </div>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="block text-sm mb-1" htmlFor="support-name">Name</label>
-                                    <input id="support-name" {...register("name")} type="text" className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm mb-1" htmlFor="support-topic">Topic *</label>
-                                    <select
-                                        id="support-topic"
-                                        {...register("topic")}
-                                        aria-invalid={!!errors.topic}
-                                        aria-describedby={errors.topic ? "support-topic-error" : undefined}
-                                        className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                    <aside className="lg:col-span-5">
+                        <div className="sticky top-24">
+                            <div className="rounded-2xl border border-gray-200 bg-white shadow-lg p-6 sm:p-8">
+                                <h2 className="text-2xl font-bold text-gray-900 mb-2">Contact Support</h2>
+                                <p className="text-gray-600 mb-6 text-sm">Can't find what you're looking for? Send us a message.</p>
+
+                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="support-email">Email *</label>
+                                        <input
+                                            id="support-email"
+                                            {...register("email")}
+                                            type="email"
+                                            aria-invalid={!!errors.email}
+                                            aria-describedby={errors.email ? "support-email-error" : undefined}
+                                            className="w-full rounded-xl border border-gray-300 px-4 py-2.5 outline-none focus:ring-2 focus:ring-main focus:border-transparent transition-all"
+                                            placeholder="you@example.com"
+                                        />
+                                        {errors.email && <p id="support-email-error" className="text-xs text-red-600 mt-1">{errors.email.message}</p>}
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="support-name">Name</label>
+                                            <input id="support-name" {...register("name")} type="text" className="w-full rounded-xl border border-gray-300 px-4 py-2.5 outline-none focus:ring-2 focus:ring-main focus:border-transparent transition-all" placeholder="Optional" />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="support-topic">Topic *</label>
+                                            <select
+                                                id="support-topic"
+                                                {...register("topic")}
+                                                aria-invalid={!!errors.topic}
+                                                aria-describedby={errors.topic ? "support-topic-error" : undefined}
+                                                className="w-full rounded-xl border border-gray-300 px-4 py-2.5 outline-none focus:ring-2 focus:ring-main focus:border-transparent transition-all bg-white"
+                                            >
+                                                <option value="">Select…</option>
+                                                <option>General</option>
+                                                <option>Account</option>
+                                                <option>Logging Food</option>
+                                                <option>AI Suggestions</option>
+                                                <option>Notifications</option>
+                                                <option>Billing</option>
+                                                <option>Bug</option>
+                                            </select>
+                                            {errors.topic && <p id="support-topic-error" className="text-xs text-red-600 mt-1">{errors.topic.message as string}</p>}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="support-subject">Subject *</label>
+                                        <input
+                                            id="support-subject"
+                                            {...register("subject")}
+                                            type="text"
+                                            aria-invalid={!!errors.subject}
+                                            aria-describedby={errors.subject ? "support-subject-error" : undefined}
+                                            className="w-full rounded-xl border border-gray-300 px-4 py-2.5 outline-none focus:ring-2 focus:ring-main focus:border-transparent transition-all"
+                                            placeholder="Brief summary"
+                                        />
+                                        {errors.subject && <p id="support-subject-error" className="text-xs text-red-600 mt-1">{errors.subject.message}</p>}
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="support-message">Message *</label>
+                                        <textarea
+                                            id="support-message"
+                                            {...register("message")}
+                                            rows={5}
+                                            aria-invalid={!!errors.message}
+                                            aria-describedby={errors.message ? "support-message-error" : undefined}
+                                            className="w-full rounded-xl border border-gray-300 px-4 py-2.5 outline-none focus:ring-2 focus:ring-main focus:border-transparent transition-all resize-none"
+                                            placeholder="How can we help?"
+                                        />
+                                        {errors.message && <p id="support-message-error" className="text-xs text-red-600 mt-1">{errors.message.message}</p>}
+                                    </div>
+                                    <div className="mt-2">
+                                        <div ref={recaptchaRef} className="g-recaptcha" />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={submitState === "sending" || !captchaSolved}
+                                        className="w-full rounded-xl bg-gray-900 text-white py-3 font-bold shadow-lg hover:bg-gray-800 hover:shadow-xl transition-all duration-300 disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0"
                                     >
-                                        <option value="">Select…</option>
-                                        <option>General</option>
-                                        <option>Account</option>
-                                        <option>Logging Food</option>
-                                        <option>AI Suggestions</option>
-                                        <option>Notifications</option>
-                                        <option>Billing</option>
-                                        <option>Bug</option>
-                                    </select>
-                                    {errors.topic && <p id="support-topic-error" className="text-xs text-red-600 mt-1">{errors.topic.message as string}</p>}
-                                </div>
+                                        {submitState === "sending" ? (
+                                            <span className="flex items-center justify-center gap-2">
+                                                <i className="fas fa-spinner fa-spin"></i> Sending…
+                                            </span>
+                                        ) : (!captchaSolved ? "Please verify you're human…" : "Send Message")}
+                                    </button>
+                                    {submitState === "done" && (
+                                        <div className="p-4 rounded-xl bg-green-50 text-green-700 text-sm font-medium flex items-center gap-2 animate-fade-in">
+                                            <i className="fas fa-check-circle"></i>
+                                            Thanks! We got your message and will reply soon.
+                                        </div>
+                                    )}
+                                    {submitState === "error" && (
+                                        <div className="p-4 rounded-xl bg-red-50 text-red-700 text-sm font-medium flex items-center gap-2 animate-fade-in">
+                                            <i className="fas fa-exclamation-circle"></i>
+                                            We couldn't reach the server—opening your mail app instead.
+                                        </div>
+                                    )}
+                                    <p className="text-xs text-gray-500 text-center">
+                                        By submitting, you agree to be contacted at the provided email.
+                                    </p>
+                                    <small className="text-xs text-gray-400 block text-center mt-1">
+                                        Protected by reCAPTCHA v2
+                                    </small>
+                                </form>
                             </div>
-                            <div>
-                                <label className="block text-sm mb-1" htmlFor="support-subject">Subject *</label>
-                                <input
-                                    id="support-subject"
-                                    {...register("subject")}
-                                    type="text"
-                                    aria-invalid={!!errors.subject}
-                                    aria-describedby={errors.subject ? "support-subject-error" : undefined}
-                                    className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                {errors.subject && <p id="support-subject-error" className="text-xs text-red-600 mt-1">{errors.subject.message}</p>}
-                            </div>
-                            <div>
-                                <label className="block text-sm mb-1" htmlFor="support-message">Message *</label>
-                                <textarea
-                                    id="support-message"
-                                    {...register("message")}
-                                    rows={5}
-                                    aria-invalid={!!errors.message}
-                                    aria-describedby={errors.message ? "support-message-error" : undefined}
-                                    className="w-full rounded-xl border border-neutral-300 px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                {errors.message && <p id="support-message-error" className="text-xs text-red-600 mt-1">{errors.message.message}</p>}
-                            </div>
-                            <div className="mt-2">
-                                <div ref={recaptchaRef} className="g-recaptcha" />
-                            </div>
-                            <button
-                                type="submit"
-                                disabled={submitState === "sending" || !captchaSolved}
-                                className="w-full rounded-xl bg-main text-white py-2 font-medium hover:bg-main-dark disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed"
-                            >
-                                {submitState === "sending" ? "Sending…" : (!captchaSolved ? "Please verify you're human…" : "Send message")}
-                            </button>
-                            {submitState === "done" && (
-                                <p className="text-sm text-green-700">Thanks! We got your message and will reply soon.</p>
-                            )}
-                            {submitState === "error" && (
-                                <p className="text-sm text-amber-700">We couldn't reach the server—opening your mail app instead.</p>
-                            )}
-                            <p className="text-xs text-neutral-500">By submitting, you agree to be contacted at the provided email.</p>
-                            <small className="text-xs text-neutral-500 block text-center mt-1">
-                                Protected by reCAPTCHA v2
-                            </small>
-                        </form>
+                        </div>
                     </aside>
                 </div>
 
@@ -515,71 +546,3 @@ export default function Support() {
         </div>
     );
 }
-
-/* =======================================================================
-   NEXT.JS API ROUTE (choose one) — place in /app/api/support/route.ts
-   =======================================================================
-
-// --- Option A: Resend (https://resend.com) ---
-import { NextResponse } from "next/server";
-import { z } from "zod";
-
-const SupportSchema = z.object({
-  name: z.string().max(80).optional(),
-  email: z.string().email(),
-  topic: z.string(),
-  subject: z.string().min(3),
-  message: z.string().min(10),
-  path: z.string().optional(),
-});
-
-export async function POST(req: Request) {
-  try {
-    const json = await req.json();
-    const data = SupportSchema.parse(json);
-
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) return NextResponse.json({ ok: false }, { status: 500 });
-
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: "NutriTrack Support <support@nutritrack-app.com>",
-        to: ["support@nutritrack-app.com"],
-        reply_to: data.email,
-        subject: `[${data.topic}] ${data.subject}`,
-        text: `From: ${data.name ?? ""} <${data.email}>\nTopic: ${data.topic}\nPath: ${data.path ?? ""}\n\n${data.message}`,
-      }),
-    });
-
-    if (!res.ok) return NextResponse.json({ ok: false }, { status: 500 });
-    return NextResponse.json({ ok: true });
-  } catch (e) {
-    return NextResponse.json({ ok: false }, { status: 400 });
-  }
-}
-
-// --- Option B: Nodemailer/SMTP ---
-// import nodemailer from "nodemailer";
-// export async function POST(req: Request) {
-//   const data = SupportSchema.parse(await req.json());
-//   const transporter = nodemailer.createTransport({
-//     host: process.env.SMTP_HOST,
-//     port: Number(process.env.SMTP_PORT || 587),
-//     secure: false,
-//     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-//   });
-//   await transporter.sendMail({
-//     from: process.env.SMTP_FROM || "support@nutritrack-app.com",
-//     to: "support@nutritrack-app.com",
-//     replyTo: data.email,
-//     subject: `[${data.topic}] ${data.subject}`,
-//     text: `From: ${data.name ?? ""} <${data.email}>\nTopic: ${data.topic}\nPath: ${data.path ?? ""}\n\n${data.message}`,
-//   });
-//   return new Response(JSON.stringify({ ok: true }), { status: 200 });
-// }
-*/

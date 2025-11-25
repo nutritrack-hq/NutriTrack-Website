@@ -5,7 +5,18 @@ export default {
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                main: '#2ECC71', // Vibrant Green
+                'main-dark': '#27AE60',
+                accent: '#FF7F11', // Orange accent
+                surface: '#F3F4F6', // Light gray surface
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', 'sans-serif'],
+                display: ['Outfit', 'system-ui', 'sans-serif'],
+            },
+        },
     },
     plugins: [],
 }
