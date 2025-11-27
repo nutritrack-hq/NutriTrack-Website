@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import './App.css'
@@ -8,6 +8,8 @@ import { gaEvent } from './analytics'
 import Support from './pages/Support'
 import TermsOfService from './pages/TermsOfService'
 import Contact from './components/Contact'
+import SEOPage from './pages/SEOPage'
+import { seoPages } from './data/seo-pages'
 
 function GAListener() {
   const location = useLocation()
@@ -31,8 +33,15 @@ function GAListener() {
       description = 'Reach out to MacroAura’s team for questions, feedback, or support.'
       break
     default:
-      title = 'MacroAura — Track Nutrition Smarter'
-      description = 'Track your meals, calories, macros, and progress effortlessly with MacroAura.'
+      // Check if it's an SEO page
+      const seoPage = seoPages.find(page => `/${page.slug}` === path);
+      if (seoPage) {
+        title = seoPage.title;
+        description = seoPage.description;
+      } else {
+        title = 'MacroAura — Track Nutrition Smarter'
+        description = 'Track your meals, calories, macros, and progress effortlessly with MacroAura.'
+      }
       break
   }
 
@@ -48,7 +57,7 @@ function GAListener() {
         page_path: location.pathname,
       })
     }
-  }, [location.pathname])
+  }, [location.pathname, title])
 
   return (
     <Helmet>
@@ -73,11 +82,22 @@ export default function App() {
       <BrowserRouter>
         <GAListener />
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/support-center" element={<Support />} />
           <Route path='/terms-of-service' element={<TermsOfService />} />
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="*" element={<Landing />} />
+
+          {/* SEO Landing Pages */}
+          {seoPages.map((page) => (
+            <Route
+              key={page.slug}
+              path={`/${page.slug}`}
+              element={<SEOPage data={page} />}
+            />
+          ))}
+
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

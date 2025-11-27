@@ -23,33 +23,43 @@ export default function Landing() {
   return (
     <>
       <Helmet>
-        <title>MacroAura — Track Your Nutrition, Build Better Habits</title>
+        <title>MacroAura — Macro Counter & Protein Tracker App</title>
         <meta
           name="description"
-          content="MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights. Simple, privacy-first, and built for real life."
+          content="MacroAura is the ultimate calorie and macro tracker. Use our daily macros log, macro calculator, and diet app features to build better habits."
         />
         <link rel="canonical" href="https://www.macroaura.com/" />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.macroaura.com/" />
-        <meta property="og:title" content="MacroAura — Track Your Nutrition, Build Better Habits" />
-        <meta property="og:description" content="MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights. Simple, privacy-first, and built for real life." />
+        <meta property="og:title" content="MacroAura — Macro Counter & Protein Tracker App" />
+        <meta property="og:description" content="MacroAura is the ultimate calorie and macro tracker. Use our daily macros log, macro calculator, and diet app features to build better habits." />
         <meta property="og:image" content="https://www.macroaura.com/logo-green.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:locale" content="en_US" />
-        <meta name="twitter:title" content="MacroAura — Track Your Nutrition, Build Better Habits" />
-        <meta name="twitter:description" content="MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights. Simple, privacy-first, and built for real life." />
+        <meta name="twitter:title" content="MacroAura — Macro Counter & Protein Tracker App" />
+        <meta name="twitter:description" content="MacroAura is the ultimate calorie and macro tracker. Use our daily macros log, macro calculator, and diet app features to build better habits." />
         <meta name="twitter:image" content="https://www.macroaura.com/logo-green.jpg" />
-        <meta name="keywords" content="macro tracker, nutrition app, calorie counter, food log, habit builder, ios app, healthkit sync" />
+        <meta name="keywords" content="macro counter, macro app, track macros app, macro calculator, daily macros log, macro diet app, protein tracker app, calorie and macro tracker, weight tracker" />
         {/* JSON-LD Organization & SoftwareApplication Schema */}
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@graph": [
+                {
+                  "@type": "WebSite",
+                  "name": "MacroAura",
+                  "url": "https://www.macroaura.com/",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.macroaura.com/search?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                },
                 {
                   "@type": "Organization",
                   "name": "MacroAura",
@@ -71,12 +81,7 @@ export default function Landing() {
                     "price": "0",
                     "priceCurrency": "USD"
                   },
-                  "description": "MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights.",
-                  "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.8",
-                    "ratingCount": "120"
-                  }
+                  "description": "MacroAura helps you log meals, analyze macros, and build better nutrition habits with personalized insights."
                 }
               ]
             }
@@ -120,9 +125,9 @@ export default function Landing() {
                   variants={fadeInUp}
                   className="text-5xl font-display font-extrabold tracking-tight text-gray-900 sm:text-6xl md:text-7xl mb-6 leading-tight"
                 >
-                  Track nutrition, <br />
+                  The simple <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-main to-main-dark">
-                    build habits.
+                    macro app.
                   </span>
                 </motion.h1>
                 <motion.p
@@ -131,9 +136,7 @@ export default function Landing() {
                   variants={fadeInUp}
                   className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
                 >
-                  MacroAura helps you log meals, analyze macros, and stay
-                  consistent with personalized insights. Simple, fast, and built
-                  for real life.
+                  MacroAura is the macro counter designed for real life. Log meals, analyze nutrients, and stay consistent with our intuitive macro app.
                 </motion.p>
                 <motion.div
                   initial="hidden"
@@ -172,7 +175,7 @@ export default function Landing() {
                       <img
                         src="app-home.png"
                         className="w-full h-auto"
-                        alt='MacroAura App Interface'
+                        alt='MacroAura Macro Counter App Interface'
                       />
                     </div>
                   </motion.div>
@@ -226,7 +229,7 @@ export default function Landing() {
             >
               {[
                 {
-                  title: "Fast meal logging",
+                  title: "Daily macros log",
                   desc: "Save time with quick-add foods and recent meals.",
                   icon: "fa-bolt"
                 },
@@ -236,12 +239,12 @@ export default function Landing() {
                   icon: "fa-chart-pie"
                 },
                 {
-                  title: "Habit streaks",
-                  desc: "Stay motivated with daily goals and streak tracking.",
+                  title: "Weight & Habit Tracker",
+                  desc: "Track your weight, stay motivated with daily goals and streak tracking.",
                   icon: "fa-fire"
                 },
                 {
-                  title: "Personalized targets",
+                  title: "Macro calculator",
                   desc: "Calibrated to your goals: cut, bulk, or maintain.",
                   icon: "fa-bullseye"
                 },
@@ -304,9 +307,9 @@ export default function Landing() {
                     className="text-center lg:text-right"
                   >
 
-                    <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">Log meals your way</h3>
+                    <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">Track macros app</h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
-                      Snap barcodes, speak your foods, or tap quick-add. Logging has never been easier or faster.
+                      Snap barcodes, speak your foods, or tap quick-add. Our track macros app makes logging easier and faster than ever.
                     </p>
                   </motion.div>
                   <motion.div
@@ -317,7 +320,7 @@ export default function Landing() {
                     className="mt-12 lg:mt-0 relative group flex justify-center lg:block"
                   >
                     <div className="relative rounded-3xl bg-white  transform transition-transform group-hover:scale-[1.02] duration-500  w-4/5 lg:w-full flex justify-center md:-rotate-1">
-                      <img src="/app-img-diary.png" alt="Track calories" className="w-full lg:w-3/5 rounded-2xl" />
+                      <img src="/app-img-diary.png" alt="Daily macros log screen" className="w-full lg:w-3/5 rounded-2xl" />
                     </div>
                   </motion.div>
                 </div>
@@ -333,10 +336,10 @@ export default function Landing() {
                     className="order-1 lg:order-2 text-center lg:text-left"
                   >
                     <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">
-                      See your progress clearly
+                      Protein tracker app
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
-                      Charts, streaks, and insights that keep you on track without stressing perfection.
+                      Charts, streaks, and insights that keep you on track. The perfect protein tracker app for hitting your daily goals.
                     </p>
                   </motion.div>
 
@@ -351,7 +354,7 @@ export default function Landing() {
                     <div className="relative rounded-3xl transform transition-transform group-hover:scale-[1.02] duration-500 w-4/5 lg:w-full flex justify-center md:rotate-1">
                       <img
                         src="/progress-screen.png"
-                        alt="Follow progress"
+                        alt="Macro diet app progress screen"
                         className="w-full lg:w-3/5 rounded-2xl"
                       />
                     </div>
@@ -368,9 +371,9 @@ export default function Landing() {
                     className="text-center lg:text-right"
                   >
 
-                    <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">Smarter eating, simplified</h3>
+                    <h3 className="text-3xl font-display font-bold text-gray-900 mb-4">Calorie and macro tracker</h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
-                      Discover what fuels you best and get meal ideas tailored to your lifestyle.
+                      Discover what fuels you best. A complete calorie and macro tracker tailored to your lifestyle.
                     </p>
                   </motion.div>
                   <motion.div
@@ -381,7 +384,7 @@ export default function Landing() {
                     className="mt-12 lg:mt-0 relative group flex justify-center lg:block"
                   >
                     <div className="relative rounded-3xl  transform transition-transform group-hover:scale-[1.02] duration-500 w-4/5 lg:w-full flex justify-center md:-rotate-1">
-                      <img src="/app-img-search.png" alt="Search foods" className="w-full lg:w-3/5 rounded-2xl" />
+                      <img src="/app-img-search.png" alt="Search foods in macro app" className="w-full lg:w-3/5 rounded-2xl" />
                     </div>
                   </motion.div>
                 </div>
